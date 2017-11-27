@@ -23,7 +23,8 @@
 <script type="text/javascript" src="js/itemActions.js"></script>
 <h2>Your items List</h2>
 <table id="yourItemsList" class="display" cellspacing="0" width="100%">
- <tr>
+      <thead>
+       <tr>
              <th>Item HSN</th>
              <th>Item Id</th>
              <th>Item Name</th>
@@ -32,6 +33,7 @@
              <th>Delete</th>
              
              </tr>
+             </thead>
      <c:forEach items="${itemDetailsMappedObj}" var="itemDetailMappedObject" varStatus="gridRow">
                 <tr>
                 <td>${itemDetailMappedObject.itemDetails.ssnObject.ssnNumber}</td>
@@ -87,7 +89,7 @@
          }, {
              "orderable": true
          }],
-        "scrollY":        "200px",
+    //    "scrollY":        "400px",
         "scrollCollapse": false,
         "info":           true,
         "paging":         true
