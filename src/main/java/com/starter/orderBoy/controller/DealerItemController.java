@@ -1,7 +1,6 @@
 package com.starter.orderBoy.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,10 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,24 +33,18 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.starter.orderBoy.entity.ItemCheckedListPojo;
-import com.starter.orderBoy.entity.ItemCheckedPojo;
-import com.starter.orderBoy.entity.ItemDetails;
 import com.starter.orderBoy.entity.ItemListClass;
-import com.starter.orderBoy.entity.MyCell;
-import com.starter.orderBoy.entity.SearchItems;
-import com.starter.orderBoy.entity.SsnTable;
-import com.starter.orderBoy.entity.UserDetailsPojo;
-import com.starter.orderBoy.entity.UserItemsCustomerMapper;
-import com.starter.orderBoy.entity.UserItemsShopMapper;
-import com.starter.orderBoy.entity.UserPojo;
-import com.starter.orderBoy.service.ItemService;
+import com.starter.orderBoy.pojo.HsnTable;
+import com.starter.orderBoy.pojo.ItemDetails;
+import com.starter.orderBoy.pojo.UserItemsDealerMapper;
+import com.starter.orderBoy.service.DealerItemService;
+
 
 @Controller
-public class ItemController {
+public class DealerItemController {
 	
 	@Autowired 
-	ItemService itemService;
+	DealerItemService dealerItemService;
 	
     @Autowired 
 	private HttpSession httpSession;
@@ -62,7 +52,7 @@ public class ItemController {
     @RequestMapping(value = "/ssnItemList", method = RequestMethod.GET, produces="application/json")
     public @ResponseBody List<ItemDetails> ssnItemList(@RequestParam("ssnNumber") String ssnNumber)
     {
-    	List<ItemDetails> returnedList = itemService.ssnItemDetails(ssnNumber);
+    	List<ItemDetails> returnedList = dealerItemService.ssnItemDetails(ssnNumber);
 
     	return returnedList;
     }
@@ -70,7 +60,7 @@ public class ItemController {
     @RequestMapping(value = "/itemFetchDetails", method = RequestMethod.GET, produces="application/json")
     public @ResponseBody ItemDetails itemFetchDetails(@RequestParam("itemId") int itemId)
     {
-    	ItemDetails itemDetails = itemService.itemFetchDetails(itemId);
+    	ItemDetails itemDetails = dealerItemService.itemFetchDetails(itemId);
 
     	return itemDetails;
     }
@@ -212,16 +202,16 @@ public class ItemController {
         				{
         					if(stringValue.length() != 0)
         					{
-        						SsnTable hsnTable = new SsnTable();
-        						hsnTable.setSsnNumber(stringValue.toString());
-        						itemDetailNew.setSsnObject(hsnTable);
+        						HsnTable hsnTable = new HsnTable();
+        						hsnTable.setHsnNumber(stringValue.toString());
+        						itemDetailNew.setHsnObject(hsnTable);
         						
         					}
         					else if(intValue!=0)
         					{
-        						SsnTable hsnTable = new SsnTable();
-        						hsnTable.setSsnNumber(Integer.toString(intValue));
-        						itemDetailNew.setSsnObject(hsnTable);
+        						HsnTable hsnTable = new HsnTable();
+        						hsnTable.setHsnNumber(Integer.toString(intValue));
+        						itemDetailNew.setHsnObject(hsnTable);
         						
 
         					}
@@ -344,7 +334,7 @@ public class ItemController {
             return "fileUploadView";
         }    
         
-        List<UserItemsShopMapper> itemDetailsMappedObj = itemService.itemUploadSave(itemListClass);
+        List<UserItemsDealerMapper> itemDetailsMappedObj = dealerItemService.itemUploadSave(itemListClass);
         
         model.addAttribute("itemDetailsMappedObj", itemDetailsMappedObj);
         
@@ -360,22 +350,22 @@ public class ItemController {
     
     @RequestMapping(value="/editSingleMapItem",method= RequestMethod.GET)
     @ResponseBody
-    public ModelAndView getShopMapperEditValues(@Valid @ModelAttribute("editSingleItemForm") UserItemsShopMapper userItemsShopMapper, 
+    public ModelAndView getDealerMapperEditValues(@Valid @ModelAttribute("editSingleItemForm") UserItemsDealerMapper userItemsDealerMapper, 
     	      BindingResult result,@RequestParam("itemMapId") int itemMapId,ModelMap model)
     {
-    	UserItemsShopMapper shopMapperObjectToEdit = itemService.getShopMapperEditValues(itemMapId);
+    	UserItemsDealerMapper dealerMapperObjectToEdit = dealerItemService.getDealerMapperEditValues(itemMapId);
     	
-    	model.addAttribute("shopMapperObjectToEdit", shopMapperObjectToEdit);
+    	model.addAttribute("dealerMapperObjectToEdit", dealerMapperObjectToEdit);
     	
-    	System.out.println(shopMapperObjectToEdit.getItemDetails().getItemAutoId());
+    	System.out.println(dealerMapperObjectToEdit.getItemDetails().getItemAutoId());
     	
-    	return new ModelAndView("shopMapperEditPage", "editSingleItemForm", new UserItemsShopMapper());
+    	return new ModelAndView("dealerMapperEditPage", "editSingleItemForm", new UserItemsDealerMapper());
     	
     	
     }
     
     @RequestMapping(value = "/editSubmit", method = {RequestMethod.GET,RequestMethod.POST})
-    public String saveEditShopMapperValues(@Valid @ModelAttribute("editSingleItemForm") UserItemsShopMapper editSingleItemForm, 
+    public String saveEditDealerMapperValues(@Valid @ModelAttribute("editSingleItemForm") UserItemsDealerMapper editSingleItemForm, 
       BindingResult result,ModelMap model)
     {
         if (result.hasErrors()) {
@@ -383,33 +373,33 @@ public class ItemController {
         }  
         else
         {
-        	UserItemsShopMapper shopMapperReturned = itemService.saveEditShopMapperValues(editSingleItemForm);
+        	UserItemsDealerMapper dealerMapperReturned = dealerItemService.saveEditDealerMapperValues(editSingleItemForm);
         	return "redirect:addUserItemUpload";
         }
     }
     
     @RequestMapping(value="/deleteSingleMapItem",method= RequestMethod.GET)
     @ResponseBody
-    public ModelAndView getShopMapperDeleteValues(@Valid @ModelAttribute("deleteSingleItemForm") UserItemsShopMapper userItemsShopMapper, 
+    public ModelAndView getDealerMapperDeleteValues(@Valid @ModelAttribute("deleteSingleItemForm") UserItemsDealerMapper userItemsDealerMapper, 
     	      BindingResult result,@RequestParam("itemMapId") int itemMapId,ModelMap model)
     {
-    	UserItemsShopMapper shopMapperObjectToDelete = itemService.getShopMapperDeleteValues(itemMapId);
+    	UserItemsDealerMapper dealerMapperObjectToDelete = dealerItemService.getDealerMapperDeleteValues(itemMapId);
     	
-    	model.addAttribute("shopMapperObjectToDelete", shopMapperObjectToDelete);
+    	model.addAttribute("dealerMapperObjectToDelete", dealerMapperObjectToDelete);
     	
-    	//System.out.println(shopMapperObjectToEdit.getItemDetails().getItemAutoId());
+    	//System.out.println(dealerMapperObjectToEdit.getItemDetails().getItemAutoId());
     	
-    	return new ModelAndView("deleteConfirmBox", "deleteSingleItemConfirm", new UserItemsShopMapper());
+    	return new ModelAndView("deleteConfirmBox", "deleteSingleItemConfirm", new UserItemsDealerMapper());
     	
     	
     }
     
     
     @RequestMapping(value = "/deleteSingleMapItemConfirmed", method = {RequestMethod.GET,RequestMethod.POST})
-    public String deleteShopMapperValues(@RequestParam("itemMapId") int shopMapperIdToDelete)
+    public String deleteDealerMapperValues(@RequestParam("itemMapId") int dealerMapperIdToDelete)
     {
        
-        	String resultStatus = itemService.deleteShopMapperValues(shopMapperIdToDelete);
+        	String resultStatus = dealerItemService.deleteDealerMapperValues(dealerMapperIdToDelete);
         	return "successDeletion";
        
     }
@@ -417,5 +407,6 @@ public class ItemController {
     
     
   
+
 
 }

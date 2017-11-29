@@ -1,4 +1,4 @@
-package com.starter.orderBoy.entity;
+package com.starter.orderBoy.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +11,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.Valid;
 
+
 @Entity
-@Table(name = "SSN_TABLE")
-public class SsnTable {
+@Table(name = "HSN_TABLE")
+public class HsnTable {
 	
 	@Id
     @GeneratedValue
@@ -21,18 +22,18 @@ public class SsnTable {
     private long id;
 	
 	 @Valid
-	 @Column(name = "SSN_NUMBER")
-	 private String ssnNumber;
+	 @Column(name = "HSN_NUMBER")
+	 private String hsnNumber;
 	 
 	 @Valid
-	 @Column(name = "SSN_NAME")
-	 private String ssnName;
+	 @Column(name = "HSN_NAME")
+	 private String hsnName;
 	 
 	 @Valid
 	 @Column(name = "DESCRIPTION")
 	 private String description;
 	 
-	 @OneToMany(mappedBy="ssnObject")  
+	 @OneToMany(mappedBy="hsnObject")  
 	 private List<ItemDetails> itemsList = new ArrayList<ItemDetails>();
 
 	public long getId() {
@@ -43,20 +44,20 @@ public class SsnTable {
 		this.id = id;
 	}
 
-	public String getSsnNumber() {
-		return ssnNumber;
+	public String getHsnNumber() {
+		return hsnNumber;
 	}
 
-	public void setSsnNumber(String ssnNumber) {
-		this.ssnNumber = ssnNumber;
+	public void setHsnNumber(String hsnNumber) {
+		this.hsnNumber = hsnNumber;
 	}
 
-	public String getSsnName() {
-		return ssnName;
+	public String getHsnName() {
+		return hsnName;
 	}
 
-	public void setSsnName(String ssnName) {
-		this.ssnName = ssnName;
+	public void setHsnName(String hsnName) {
+		this.hsnName = hsnName;
 	}
 
 	public String getDescription() {
@@ -76,7 +77,5 @@ public class SsnTable {
 	}
 	 
 	 
-	    
-	
 
 }

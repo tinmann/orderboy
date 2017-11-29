@@ -29,7 +29,7 @@
               <c:forEach items="${editItemForm.itemDetailsListConfirm}" var="itemDetail" varStatus="gridRow">
                 <tr>
                   
-                    <td><form:input path="itemDetailsListConfirm[${gridRow.index}].ssnObject.ssnNumber" value="${itemDetail.ssnObject.ssnNumber}" /></td>
+                    <td><form:input path="itemDetailsListConfirm[${gridRow.index}].hsnObject.hsnNumber" value="${itemDetail.hsnObject.hsnNumber}" /></td>
                     
                      <td><form:input path="itemDetailsListConfirm[${gridRow.index}].name" value="${itemDetail.name}" /></td>
                       <form:errors path="itemDetailsListConfirm[${gridRow.index}].name" style="color: red;"></form:errors>

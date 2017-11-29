@@ -32,7 +32,7 @@
                     <form:select path="type" selected="type">
                         <%-- <form:options items="${typeList}" /> --%>
                        <option value="">--- Select ---</option>
-                       <option value="Customer">Customer</option>
+                       <option value="Dealer">Dealer</option>
                        <option value="Retailer">Retailer</option>
                         </form:select>
                     </td>

@@ -30,12 +30,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.starter.orderBoy.entity.ItemCheckedListPojo;
 import com.starter.orderBoy.entity.ItemCheckedPojo;
-import com.starter.orderBoy.entity.ItemDetails;
 import com.starter.orderBoy.entity.SearchItems;
-import com.starter.orderBoy.entity.UserDetailsPojo;
-import com.starter.orderBoy.entity.UserItemsCustomerMapper;
-import com.starter.orderBoy.entity.UserItemsShopMapper;
-import com.starter.orderBoy.entity.UserPojo;
+import com.starter.orderBoy.pojo.ItemDetails;
+import com.starter.orderBoy.pojo.UserDetailsPojo;
+import com.starter.orderBoy.pojo.UserItemsDealerMapper;
+import com.starter.orderBoy.pojo.UserItemsRetailerMapper;
+import com.starter.orderBoy.pojo.UserPojo;
 import com.starter.orderBoy.service.UserService;
 
 
@@ -138,16 +138,16 @@ public class UserController {
     	
     	List<ItemCheckedPojo> formDeliverList = new ArrayList<ItemCheckedPojo>();
     	
-    	List<ItemDetails> itemDetailsList = userService.getItemDetailsForShopkeeper(searchItems);
+    	List<ItemDetails> itemDetailsList = userService.getItemDetailsForDealer(searchItems);
     	
     	
     	UserPojo userObject= (UserPojo)httpSession.getAttribute("user");
     	
     	String userType = userObject.getUserDetailsPojo().getType();
     	
-    	if(userType.equals("Retailer"))
+    	if(userType.equals("Dealer"))
     	{
-    		List<UserItemsShopMapper> previousItemsShopMapperCheckList = userService.getPreviousItemDetailsForShopkeeper();
+    		List<UserItemsDealerMapper> previousItemsDealerMapperCheckList = userService.getPreviousItemDetailsForDealer();
         	
         	System.out.println(itemDetailsList);
         	
@@ -157,9 +157,9 @@ public class UserController {
         		checkedPojoItem.setItemObj(itemDetail);
         		formDeliverList.add(checkedPojoItem);
         		
-        		for (UserItemsShopMapper previousItemsShopMapperCheck : previousItemsShopMapperCheckList) 
+        		for (UserItemsDealerMapper previousItemsDealerMapperCheck : previousItemsDealerMapperCheckList) 
             	{
-            	   if(itemDetail.getId() == previousItemsShopMapperCheck.getItemDetails().getId())
+            	   if(itemDetail.getId() == previousItemsDealerMapperCheck.getItemDetails().getId())
             	   {
             		   checkedPojoItem.setChecked(1); 
             		   break;
@@ -170,9 +170,9 @@ public class UserController {
         	
         	itemCheckedListPojo.setItemCheckedList(formDeliverList);
     	}
-    	else if(userType.equals("Customer"))
+    	else if(userType.equals("Retailer"))
     	{
-           List<UserItemsCustomerMapper> previousItemsCustomerMapperCheckList = userService.getPreviousItemDetailsForCustomer();       	
+           List<UserItemsRetailerMapper> previousItemsRetailerMapperCheckList = userService.getPreviousItemDetailsForRetailer();       	
         	
         	for (ItemDetails itemDetail : itemDetailsList) 
         	{
@@ -180,9 +180,9 @@ public class UserController {
         		checkedPojoItem.setItemObj(itemDetail);
         		formDeliverList.add(checkedPojoItem);
         		
-        		for (UserItemsCustomerMapper previousItemsCustomerMapperCheck : previousItemsCustomerMapperCheckList) 
+        		for (UserItemsRetailerMapper previousItemsRetailerMapperCheck : previousItemsRetailerMapperCheckList) 
             	{
-            	   if(itemDetail.getId() == previousItemsCustomerMapperCheck.getItemDetails().getId())
+            	   if(itemDetail.getId() == previousItemsRetailerMapperCheck.getItemDetails().getId())
             	   {
             		   checkedPojoItem.setChecked(1); 
             		   break;

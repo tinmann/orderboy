@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 
 import com.starter.orderBoy.dao.UserSaveDao;
 import com.starter.orderBoy.entity.ItemCheckedListPojo;
-import com.starter.orderBoy.entity.ItemDetails;
 import com.starter.orderBoy.entity.SearchItems;
-import com.starter.orderBoy.entity.UserDetailsPojo;
-import com.starter.orderBoy.entity.UserItemsCustomerMapper;
-import com.starter.orderBoy.entity.UserItemsShopMapper;
-import com.starter.orderBoy.entity.UserPojo;
+import com.starter.orderBoy.pojo.ItemDetails;
+import com.starter.orderBoy.pojo.UserDetailsPojo;
+import com.starter.orderBoy.pojo.UserItemsDealerMapper;
+import com.starter.orderBoy.pojo.UserItemsRetailerMapper;
+import com.starter.orderBoy.pojo.UserPojo;
 
 
 
@@ -30,22 +30,22 @@ public class UserService {
 	{
 		return userSaveDao.loginUser(userPojo);
 	}
-	public List<ItemDetails> getItemDetailsForShopkeeper(SearchItems searchItems) //throws Exception
+	public List<ItemDetails> getItemDetailsForDealer(SearchItems searchItems) //throws Exception
 	{
-		return userSaveDao.getItemDetailsForShopkeeper(searchItems);
+		return userSaveDao.getItemDetailsForDealer(searchItems);
 	}
 	public String addUserItem(ItemCheckedListPojo itemCheckedListPojo)
 	{
 		return userSaveDao.addUserItem(itemCheckedListPojo);
 	}
 	
-	public List<UserItemsShopMapper> getPreviousItemDetailsForShopkeeper()
+	public List<UserItemsDealerMapper> getPreviousItemDetailsForDealer()
 	{
-		return userSaveDao.getPreviousItemDetailsForShopkeeper();
+		return userSaveDao.getPreviousItemDetailsForDealer();
 	}
-	public List<UserItemsCustomerMapper> getPreviousItemDetailsForCustomer()
+	public List<UserItemsRetailerMapper> getPreviousItemDetailsForRetailer()
 	{
-		return userSaveDao.getPreviousItemDetailsForCustomer();
+		return userSaveDao.getPreviousItemDetailsForRetailer();
 	}
 
 }

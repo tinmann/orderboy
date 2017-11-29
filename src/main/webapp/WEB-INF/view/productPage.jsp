@@ -1,4 +1,4 @@
-<%@ page import = "com.starter.orderBoy.entity.UserPojo"%>
+<%@ page import = "com.starter.orderBoy.pojo.UserPojo"%>
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

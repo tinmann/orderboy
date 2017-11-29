@@ -75,7 +75,7 @@ window.onclick = function(event) {
                             <label><b>Item ID:</b></label>
                         </td>
                         <td>
-                            ${shopMapperObjectToEdit.itemDetails.itemAutoId}
+                            ${dealerMapperObjectToEdit.itemDetails.itemAutoId}
                             
                         </td>
                        
@@ -87,7 +87,7 @@ window.onclick = function(event) {
                         </td>
                         <td>
                           <%--   <form:input path="loginId" name="userId" id="userId" /> --%>
-                           ${shopMapperObjectToEdit.itemDetails.name}
+                           ${dealerMapperObjectToEdit.itemDetails.name}
                         </td>
                        
                     </tr>
@@ -96,14 +96,14 @@ window.onclick = function(event) {
                             <form:label path="quantity" class="animated"><b>Item Quantity:</b></form:label>
                         </td>
                         <td>
-                       <form:input path="quantity" name="quantity" id="itemId" onkeypress="return event.charCode >= 48 && event.charCode <= 57;" value="${shopMapperObjectToEdit.quantity}" />
+                       <form:input path="quantity" name="quantity" id="itemId" onkeypress="return event.charCode >= 48 && event.charCode <= 57;" value="${dealerMapperObjectToEdit.quantity}" />
                        
                         </td>
                        <%--  <td><form:errors  id="quantityErr" path="quantity" style="color: red;"></form:errors></td> --%>
                         <td><span id="quantityErr" style="color: red;"></span></td>
                     </tr>
                     
-                     <form:hidden path="id" value ="${shopMapperObjectToEdit.id}"/>
+                     <form:hidden path="id" value ="${dealerMapperObjectToEdit.id}"/>
                 
                     <tr class="single_abouts wow">
                         <td></td>

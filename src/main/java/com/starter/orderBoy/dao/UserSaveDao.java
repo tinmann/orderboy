@@ -16,15 +16,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.starter.orderBoy.entity.ItemCheckedListPojo;
 import com.starter.orderBoy.entity.ItemCheckedPojo;
-import com.starter.orderBoy.entity.ItemDetails;
+
 import com.starter.orderBoy.entity.SearchItems;
-import com.starter.orderBoy.entity.UserDetailsPojo;
-import com.starter.orderBoy.entity.UserItemsCustomerMapper;
-import com.starter.orderBoy.entity.UserItemsShopMapper;
-import com.starter.orderBoy.entity.UserPojo;
+import com.starter.orderBoy.pojo.ItemDetails;
+import com.starter.orderBoy.pojo.UserDetailsPojo;
+import com.starter.orderBoy.pojo.UserItemsDealerMapper;
+import com.starter.orderBoy.pojo.UserItemsRetailerMapper;
+import com.starter.orderBoy.pojo.UserPojo;
 import com.starter.orderBoy.repository.ItemDetailsRepository;
-import com.starter.orderBoy.repository.ItemsCustomerMapperRepository;
-import com.starter.orderBoy.repository.ItemsShopMapperRepository;
+import com.starter.orderBoy.repository.ItemsDealerMapperRepository;
+import com.starter.orderBoy.repository.ItemsRetailerMapperRepository;
 import com.starter.orderBoy.repository.UserDetailsPojoRepository;
 import com.starter.orderBoy.repository.UserPojoRepository;
 
@@ -49,10 +50,10 @@ public class UserSaveDao {
 	private ItemDetailsRepository itemDetailsRepository;
 	
 	@Autowired
-	private ItemsShopMapperRepository itemsShopMapperRepository;
+	private ItemsDealerMapperRepository itemsDealerMapperRepository;
 	
 	@Autowired
-	private ItemsCustomerMapperRepository itemsCustomerMapperRepository;
+	private ItemsRetailerMapperRepository itemsRetailerMapperRepository;
 	
 	public UserDetailsPojo registerUser(UserDetailsPojo userDetailsPojo) throws Exception
 	{
@@ -75,7 +76,7 @@ public class UserSaveDao {
 		
 	}
 	
-	public List<ItemDetails> getItemDetailsForShopkeeper(SearchItems searchItems)// throws Exception
+	public List<ItemDetails> getItemDetailsForDealer(SearchItems searchItems)// throws Exception
 	{
 	  return itemDetailsRepository.findAll();	
 	}
@@ -90,12 +91,12 @@ public class UserSaveDao {
 		
 		if(userDetailsObject.getType().equals("Retailer"))
 		{
-			List<UserItemsShopMapper> testDetail = userDetailsObject.getUserItemsShopMapper();
+			List<UserItemsDealerMapper> testDetail = userDetailsObject.getUserItemsDealerMapper();
 			// Removing the old change				
-			for(UserItemsShopMapper toDelete:testDetail)
+			for(UserItemsDealerMapper toDelete:testDetail)
 			{						
-				itemsShopMapperRepository.delete(toDelete);
-				itemsShopMapperRepository.flush();
+				itemsDealerMapperRepository.delete(toDelete);
+				itemsDealerMapperRepository.flush();
 			}
 		
 			/// Adding the new Changes
@@ -104,10 +105,10 @@ public class UserSaveDao {
 				if(itemCheckedPojo.getChecked() == 1)
 				{
 				ItemDetails ItemDetail = itemDetailsRepository.findOne(itemCheckedPojo.getItemObj().getId());
-				UserItemsShopMapper userItemsShopMapper = new UserItemsShopMapper();
-				userItemsShopMapper.setItemDetails(ItemDetail);
-				userItemsShopMapper.setUserDetails(userDetailsObject);
-				itemsShopMapperRepository.save(userItemsShopMapper);
+				UserItemsDealerMapper userItemsDealerMapper = new UserItemsDealerMapper();
+				userItemsDealerMapper.setItemDetails(ItemDetail);
+				userItemsDealerMapper.setUserDetails(userDetailsObject);
+				itemsDealerMapperRepository.save(userItemsDealerMapper);
 				//entityManager.persist(userItemsShopMapper);				
 				}
 			}
@@ -115,12 +116,12 @@ public class UserSaveDao {
 		}
 		else if(userDetailsObject.getType().equals("Customer"))
 		{
-			List<UserItemsCustomerMapper> testDetail = userDetailsObject.getUserItemsCustomerMapper();
+			List<UserItemsRetailerMapper> testDetail = userDetailsObject.getUserItemsRetailerMapper();
 			// Removing the old change			
-			for(UserItemsCustomerMapper toDelete:testDetail)
+			for(UserItemsRetailerMapper toDelete:testDetail)
 			{				
-				itemsCustomerMapperRepository.delete(toDelete);
-				itemsCustomerMapperRepository.flush();
+				itemsRetailerMapperRepository.delete(toDelete);
+				itemsRetailerMapperRepository.flush();
 			}
 			/// Adding the new Changes
 			for(ItemCheckedPojo itemCheckedPojo:itemCheckedListPojo.getItemCheckedList())
@@ -128,11 +129,11 @@ public class UserSaveDao {
 				if(itemCheckedPojo.getChecked() == 1)
 				{
 				ItemDetails ItemDetail = entityManager.find(ItemDetails.class, itemCheckedPojo.getItemObj().getId());				
-				UserItemsCustomerMapper userItemsCustomerMapper = new UserItemsCustomerMapper();
-				userItemsCustomerMapper.setItemDetails(ItemDetail);
-				userItemsCustomerMapper.setUserDetails(userDetailsObject);
+				UserItemsRetailerMapper userItemsRetailerMapper = new UserItemsRetailerMapper();
+				userItemsRetailerMapper.setItemDetails(ItemDetail);
+				userItemsRetailerMapper.setUserDetails(userDetailsObject);
 				//entityManager.persist(userItemsCustomerMapper);		
-				itemsCustomerMapperRepository.save(userItemsCustomerMapper);
+				itemsRetailerMapperRepository.save(userItemsRetailerMapper);
 				}
 			}
 			
@@ -144,7 +145,7 @@ public class UserSaveDao {
 		return "success";
 	}
 	
-	public List<UserItemsShopMapper> getPreviousItemDetailsForShopkeeper()
+	public List<UserItemsDealerMapper> getPreviousItemDetailsForDealer()
 	{
         UserPojo userObject= (UserPojo)httpSession.getAttribute("user");
 		
@@ -152,18 +153,18 @@ public class UserSaveDao {
 	
 		UserDetailsPojo userDetailsObject = validUserObject.getUserDetailsPojo();
 		
-		List<UserItemsShopMapper> previousUserItemShopMapperList  = new ArrayList<UserItemsShopMapper>();
+		List<UserItemsDealerMapper> previousUserItemDealerMapperList  = new ArrayList<UserItemsDealerMapper>();
 		
 		if(userDetailsObject.getType().equals("Retailer"))
 		{
-			previousUserItemShopMapperList = userDetailsObject.getUserItemsShopMapper();
+			previousUserItemDealerMapperList = userDetailsObject.getUserItemsDealerMapper();
 			
 		}
 		
-		return previousUserItemShopMapperList;
+		return previousUserItemDealerMapperList;
 	}
 	
-	public List<UserItemsCustomerMapper> getPreviousItemDetailsForCustomer()
+	public List<UserItemsRetailerMapper> getPreviousItemDetailsForRetailer()
 	{
         UserPojo userObject= (UserPojo)httpSession.getAttribute("user");
 		
@@ -171,15 +172,15 @@ public class UserSaveDao {
 	
 		UserDetailsPojo userDetailsObject = validUserObject.getUserDetailsPojo();
 		
-		List<UserItemsCustomerMapper> previousUserItemCustomerMapperList  = new ArrayList<UserItemsCustomerMapper>();
+		List<UserItemsRetailerMapper> previousUserItemRetailerMapperList  = new ArrayList<UserItemsRetailerMapper>();
 		
 		if(userDetailsObject.getType().equals("Customer"))
 		{
-			previousUserItemCustomerMapperList = userDetailsObject.getUserItemsCustomerMapper();
+			previousUserItemRetailerMapperList = userDetailsObject.getUserItemsRetailerMapper();
 			
 		}
 		
-		return previousUserItemCustomerMapperList;
+		return previousUserItemRetailerMapperList;
 	}
 	
 }

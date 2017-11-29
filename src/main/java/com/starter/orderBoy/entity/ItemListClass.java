@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.starter.orderBoy.pojo.ItemDetails;
+
 public class ItemListClass {
 	
 	@Valid

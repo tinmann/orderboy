@@ -36,7 +36,7 @@
              </thead>
      <c:forEach items="${itemDetailsMappedObj}" var="itemDetailMappedObject" varStatus="gridRow">
                 <tr>
-                <td>${itemDetailMappedObject.itemDetails.ssnObject.ssnNumber}</td>
+                <td>${itemDetailMappedObject.itemDetails.hsnObject.hsnNumber}</td>
                 <td>${itemDetailMappedObject.itemDetails.itemAutoId}</td>
                 <td>${itemDetailMappedObject.itemDetails.name}</td>
                 <td>${itemDetailMappedObject.quantity}</td>

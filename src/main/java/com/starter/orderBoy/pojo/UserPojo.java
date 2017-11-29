@@ -1,4 +1,4 @@
-package com.starter.orderBoy.entity;
+package com.starter.orderBoy.pojo;
 
 import java.util.ArrayList;
 import java.util.List;

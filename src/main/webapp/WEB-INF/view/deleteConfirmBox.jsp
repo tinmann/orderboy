@@ -85,11 +85,11 @@ window.onclick = function(event) {
                 <h4 id="lblTitleConfirmYesNo" class="modal-title">Warning</h4>
             </div>
             <div class="modal-body">
-                <p id="lblMsgConfirmYesNo">Are you sure you want to delete the  item ${shopMapperObjectToDelete.itemDetails.name }</p>
+                <p id="lblMsgConfirmYesNo">Are you sure you want to delete the  item ${dealerMapperObjectToDelete.itemDetails.name }</p>
             </div>
             <div class="modal-footer">
-                <button id="yes_${shopMapperObjectToDelete.id}"  type="button" class="btn btn-primary" onclick="deleteConfirmYes(this.id)">Yes</button>
-                <button id="no_${shopMapperObjectToDelete.id}"   type="button" class="btn btn-default" onclick="deleteConfirmNo(this.id)">No</button>
+                <button id="yes_${dealerMapperObjectToDelete.id}"  type="button" class="btn btn-primary" onclick="deleteConfirmYes(this.id)">Yes</button>
+                <button id="no_${dealerMapperObjectToDelete.id}"   type="button" class="btn btn-default" onclick="deleteConfirmNo(this.id)">No</button>
             </div>
         </div>
     </div>

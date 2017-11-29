@@ -1,5 +1,7 @@
 package com.starter.orderBoy.entity;
 
+import com.starter.orderBoy.pojo.ItemDetails;
+
 public class ItemCheckedPojo {
 	
 	private int checked = 0;

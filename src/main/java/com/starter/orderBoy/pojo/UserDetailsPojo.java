@@ -1,4 +1,4 @@
-package com.starter.orderBoy.entity;
+package com.starter.orderBoy.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,10 +63,10 @@ public class UserDetailsPojo {
     private List<ItemDetails> itemsShop = new ArrayList<ItemDetails>();*/
     
     @OneToMany( mappedBy="userDetails")  
-    private List<UserItemsShopMapper> userItemsShopMapper = new ArrayList<UserItemsShopMapper>();
+    private List<UserItemsDealerMapper> userItemsDealerMapper = new ArrayList<UserItemsDealerMapper>();
     
     @OneToMany( mappedBy="userDetails")  
-    private List<UserItemsCustomerMapper> userItemsCustomerMapper = new ArrayList<UserItemsCustomerMapper>();
+    private List<UserItemsRetailerMapper> userItemsRetailerMapper = new ArrayList<UserItemsRetailerMapper>();
    
    
    
@@ -145,86 +145,27 @@ public class UserDetailsPojo {
 
 
 
-	public List<UserItemsShopMapper> getUserItemsShopMapper() {
-		return userItemsShopMapper;
+	public List<UserItemsDealerMapper> getUserItemsDealerMapper() {
+		return userItemsDealerMapper;
 	}
 
 
 
-	public void setUserItemsShopMapper(List<UserItemsShopMapper> userItemsShopMapper) {
-		this.userItemsShopMapper = userItemsShopMapper;
-	}
-	
-	public void removeUserItemsShopMapper(UserItemsShopMapper userItemsShopMapperObj) {
-    	this.userItemsShopMapper.remove(userItemsShopMapperObj);
-    	
-    }
-
-
-
-	public List<UserItemsCustomerMapper> getUserItemsCustomerMapper() {
-		return userItemsCustomerMapper;
+	public void setUserItemsDealerMapper(List<UserItemsDealerMapper> userItemsDealerMapper) {
+		this.userItemsDealerMapper = userItemsDealerMapper;
 	}
 
 
 
-	public void setUserItemsCustomerMapper(List<UserItemsCustomerMapper> userItemsCustomerMapper) {
-		this.userItemsCustomerMapper = userItemsCustomerMapper;
-	}
-
-	
-
-
-	/*public List<ItemDetails> getItemsShop() {
-		return itemsShop;
+	public List<UserItemsRetailerMapper> getUserItemsRetailerMapper() {
+		return userItemsRetailerMapper;
 	}
 
 
 
-	public void setItemsShop(List<ItemDetails> itemsShop) {
-		this.itemsShop = itemsShop;
-	}
-	
-	public List<ItemDetails> getItemsCustomer() {
-		return itemsCustomer;
+	public void setUserItemsRetailerMapper(List<UserItemsRetailerMapper> userItemsRetailerMapper) {
+		this.userItemsRetailerMapper = userItemsRetailerMapper;
 	}
 
-
-
-	public void setItemsCustomer(List<ItemDetails> itemsCustomer) {
-		this.itemsCustomer = itemsCustomer;
-	}
-	
-	public void addItemRetailer(ItemDetails itemDetails) {
-		itemsShop.add(itemDetails);
-		itemDetails.getUserDetailsPojoRetailerList().add(this);
-    }
- 
-    public void removeItemRetailer(ItemDetails itemDetails) {
-    	itemDetails.getUserDetailsPojoRetailerList().remove(this);
-    	itemsShop.remove(itemDetails);
-    	
-    }
-    
-    public void addItemCustomer(ItemDetails itemDetails) {
-    	itemsCustomer.add(itemDetails);
-		itemDetails.getUserDetailsPojoCustomerList().add(this);
-    }
- 
-    public void removeItemCustomer(ItemDetails itemDetails) {
-    	itemsCustomer.remove(itemDetails);
-    	itemDetails.getUserDetailsPojoCustomerList().remove(this);
-    }
-*/
-
-
-	/*@Override
-    public String toString() {
-        return "Student [id=" + id + ", firstName=" + firstName + ", lastName="
-                + lastName + ", section=" + section + ", address=" + address
-                + "]";
-    }*/
-	
-	
  
 }

@@ -1,4 +1,4 @@
-package com.starter.orderBoy.entity;
+package com.starter.orderBoy.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,14 +46,14 @@ public class ItemDetails {
     
     
     @OneToMany(mappedBy="itemDetails")  
-    private List<UserItemsShopMapper> userItemsShopMapper = new ArrayList<UserItemsShopMapper>();
+    private List<UserItemsDealerMapper> userItemsDealerMapper = new ArrayList<UserItemsDealerMapper>();
     
     @OneToMany(mappedBy="itemDetails")  
-    private List<UserItemsCustomerMapper> userItemsCustomerMapper = new ArrayList<UserItemsCustomerMapper>();  
+    private List<UserItemsRetailerMapper> userItemsRetailerMapper = new ArrayList<UserItemsRetailerMapper>();  
      
     @ManyToOne
-    @JoinColumn(name = "SSN_ID")
-    private SsnTable ssnObject;
+    @JoinColumn(name = "HSN_ID")
+    private HsnTable hsnObject;
  
     public long getId() {
         return id;
@@ -109,36 +109,28 @@ public class ItemDetails {
     
    
 
-	
-	
-	public List<UserItemsShopMapper> getUserItemsShopMapper() {
-		return userItemsShopMapper;
+	public List<UserItemsDealerMapper> getUserItemsDealerMapper() {
+		return userItemsDealerMapper;
 	}
 
-	public void setUserItemsShopMapper(List<UserItemsShopMapper> userItemsShopMapper) {
-		this.userItemsShopMapper = userItemsShopMapper;
-	}
-	
-	public void removeUserItemsShopMapper(UserItemsShopMapper userItemsShopMapperObj) {
-    	this.userItemsShopMapper.remove(userItemsShopMapperObj);
-    	
-    }
-
-	public List<UserItemsCustomerMapper> getUserItemsCustomerMapper() {
-		return userItemsCustomerMapper;
+	public void setUserItemsDealerMapper(List<UserItemsDealerMapper> userItemsDealerMapper) {
+		this.userItemsDealerMapper = userItemsDealerMapper;
 	}
 
-	public void setUserItemsCustomerMapper(List<UserItemsCustomerMapper> userItemsCustomerMapper) {
-		this.userItemsCustomerMapper = userItemsCustomerMapper;
+	public List<UserItemsRetailerMapper> getUserItemsRetailerMapper() {
+		return userItemsRetailerMapper;
 	}
 
-	
-	public SsnTable getSsnObject() {
-		return ssnObject;
+	public void setUserItemsRetailerMapper(List<UserItemsRetailerMapper> userItemsRetailerMapper) {
+		this.userItemsRetailerMapper = userItemsRetailerMapper;
 	}
 
-	public void setSsnObject(SsnTable ssnObject) {
-		this.ssnObject = ssnObject;
+	public HsnTable getHsnObject() {
+		return hsnObject;
+	}
+
+	public void setHsnObject(HsnTable hsnObject) {
+		this.hsnObject = hsnObject;
 	}
 
 	@Override
