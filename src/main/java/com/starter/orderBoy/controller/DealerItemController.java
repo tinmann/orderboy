@@ -33,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.starter.orderBoy.entity.ItemDealerListClass;
 import com.starter.orderBoy.entity.ItemListClass;
 import com.starter.orderBoy.pojo.HsnTable;
 import com.starter.orderBoy.pojo.ItemDetails;
@@ -77,9 +78,9 @@ public class DealerItemController {
       
         String fileLocation = file.getOriginalFilename();
         
-        ItemListClass itemListClass = new ItemListClass();
+        ItemDealerListClass itemDealerListClass = new ItemDealerListClass();
         
-        List<ItemDetails> itemDetailsListUpload = new ArrayList<ItemDetails>();
+        List<UserItemsDealerMapper> userItemDealerMapperList = new ArrayList<UserItemsDealerMapper>();
         
         
         if (fileLocation != null) {
@@ -164,8 +165,8 @@ public class DealerItemController {
         		    }
         			Iterator cells = row.cellIterator();
         			
-        			ItemDetails itemDetailNew = new ItemDetails();
-        			
+        			UserItemsDealerMapper userItemsDealerMapperNew = new UserItemsDealerMapper();
+        			ItemDetails itemDetailsLocal = new ItemDetails();
         			int count = 1;
         			
         			
@@ -203,15 +204,17 @@ public class DealerItemController {
         					if(stringValue.length() != 0)
         					{
         						HsnTable hsnTable = new HsnTable();
-        						hsnTable.setHsnNumber(stringValue.toString());
-        						itemDetailNew.setHsnObject(hsnTable);
+        						hsnTable.setHsnNumber(stringValue.toString());        						
+        						itemDetailsLocal.setHsnObject(hsnTable);
+        				
         						
         					}
         					else if(intValue!=0)
         					{
         						HsnTable hsnTable = new HsnTable();
-        						hsnTable.setHsnNumber(Integer.toString(intValue));
-        						itemDetailNew.setHsnObject(hsnTable);
+        						hsnTable.setHsnNumber(Integer.toString(intValue));       						
+        						itemDetailsLocal.setHsnObject(hsnTable);
+        						
         						
 
         					}
@@ -221,25 +224,28 @@ public class DealerItemController {
         				{
         					if(stringValue.length() == 0)
         					{
-        						itemDetailNew.setName(null);
+        						itemDetailsLocal.setName(null);
+        						/*userItemsDealerMapperNew.setName(null);*/
         					}
         					else
         					{
-        						itemDetailNew.setName(stringValue.toString());
+        						itemDetailsLocal.setName(stringValue.toString());
+        						/*userItemsDealerMapperNew.setName(stringValue.toString());*/
         					}
         					
         				}
         				else if(count == 3)
         				{
-        					itemDetailNew.setDescription(stringValue.toString());
+        					itemDetailsLocal.setDescription(stringValue.toString());
+        					/*userItemsDealerMapperNew.setDescription(stringValue.toString());*/
         				}
         				else if(count == 4 &&  intValue!=0)
         				{
-        					itemDetailNew.setQuantity(intValue);
+        					userItemsDealerMapperNew.setQuantity(intValue);
         				}
         				else if(count == 5)
         				{
-        					itemDetailNew.setPrice(intValue);
+        					userItemsDealerMapperNew.setRate(intValue);
         				}
         				else if(count == 6)
         				{
@@ -269,12 +275,13 @@ public class DealerItemController {
         				
         				count++;
         			}
+        			userItemsDealerMapperNew.setItemDetails(itemDetailsLocal);
         			System.out.println();
         			
-        			if(itemDetailNew.getName()!=null && itemDetailNew.getName()!="" && itemDetailNew.getName()!=" ")
+        			if(userItemsDealerMapperNew.getItemDetails().getName()!=null && userItemsDealerMapperNew.getItemDetails().getName()!="" && userItemsDealerMapperNew.getItemDetails().getName()!=" ")
         			{
         				System.out.println("add");
-        				itemDetailsListUpload.add(itemDetailNew);
+        				userItemDealerMapperList.add(userItemsDealerMapperNew);
         			}
         			
         			
@@ -287,9 +294,9 @@ public class DealerItemController {
            // model.addAttribute("message", "File missing! Please upload an excel file.");
         }
         
-        itemListClass.setItemDetailsListConfirm(itemDetailsListUpload);
-        itemListClass.setFileName(file.getOriginalFilename());
-        itemListClass.setFileType(file.getContentType());
+        itemDealerListClass.setUserItemsDealerMapperList(userItemDealerMapperList);
+        itemDealerListClass.setFileName(file.getOriginalFilename());
+        itemDealerListClass.setFileType(file.getContentType());
        
       //  modelMap.addAttribute("editItemForm", itemListClass);
     //    modelMap.addAttribute("file", file);
@@ -298,7 +305,7 @@ public class DealerItemController {
         
        // return "redirect:fileUploadViewRoot";
         
-        redirectAttributes.addFlashAttribute("editItemForm", itemListClass);
+        redirectAttributes.addFlashAttribute("editItemForm", itemDealerListClass);
         return "redirect:fileUploadViewRoot";
         
       //  return "fileUploadView";
@@ -306,7 +313,7 @@ public class DealerItemController {
     }
     
     @RequestMapping(value = "/fileUploadViewRoot", method = RequestMethod.GET)
-    public String fileUploadViewGet(@Valid @ModelAttribute("editItemForm") ItemListClass itemListClass, 
+    public String fileUploadViewGet(@Valid @ModelAttribute("editItemForm") ItemDealerListClass itemDealerListClass, 
   	      BindingResult result,ModelMap model) {
     	 // return "redirect:addUserItemUpload";
     	return "fileUploadView";
@@ -316,7 +323,7 @@ public class DealerItemController {
   
     
     @RequestMapping(value = "/fileUploadViewRoot", method = RequestMethod.POST)
-    public String fileUploadView(@Valid @ModelAttribute("editItemForm") ItemListClass itemListClass, 
+    public String fileUploadView(@Valid @ModelAttribute("editItemForm") ItemDealerListClass itemDealerListClass, 
     	      BindingResult result,ModelMap model) {
     	
     	 
@@ -326,7 +333,7 @@ public class DealerItemController {
     }
     
     @RequestMapping(value = "/addUserItemUpload", method = {RequestMethod.GET,RequestMethod.POST})
-    public String loginUser(@Valid @ModelAttribute("editItemForm") ItemListClass itemListClass, 
+    public String loginUser(@Valid @ModelAttribute("editItemForm") ItemDealerListClass itemDealerListClass, 
       BindingResult result,ModelMap model)
     {
         if (result.hasErrors()) {
@@ -334,12 +341,12 @@ public class DealerItemController {
             return "fileUploadView";
         }    
         
-        List<UserItemsDealerMapper> itemDetailsMappedObj = dealerItemService.itemUploadSave(itemListClass);
+        List<UserItemsDealerMapper> itemDetailsMappedObj = dealerItemService.itemUploadSave(itemDealerListClass);
         
         model.addAttribute("itemDetailsMappedObj", itemDetailsMappedObj);
         
         System.out.println("valid");
-        System.out.println(itemListClass);
+        System.out.println(itemDealerListClass);
         
         
         

@@ -26,15 +26,15 @@
              <th>Item Quantity</th>
              </tr>
              
-              <c:forEach items="${editItemForm.itemDetailsListConfirm}" var="itemDetail" varStatus="gridRow">
+              <c:forEach items="${editItemForm.userItemsDealerMapperList}" var="itemDealerMapper" varStatus="gridRow">
                 <tr>
                   
-                    <td><form:input path="itemDetailsListConfirm[${gridRow.index}].hsnObject.hsnNumber" value="${itemDetail.hsnObject.hsnNumber}" /></td>
+                    <td><form:input path="userItemsDealerMapperList[${gridRow.index}].itemDetails.hsnObject.hsnNumber" value="${itemDealerMapper.itemDetails.hsnObject.hsnNumber}" /></td>
                     
-                     <td><form:input path="itemDetailsListConfirm[${gridRow.index}].name" value="${itemDetail.name}" /></td>
-                      <form:errors path="itemDetailsListConfirm[${gridRow.index}].name" style="color: red;"></form:errors>
+                     <td><form:input path="userItemsDealerMapperList[${gridRow.index}].itemDetails.name" value="${itemDealerMapper.itemDetails.name}" /></td>
+                      <form:errors path="userItemsDealerMapperList[${gridRow.index}].itemDetails.name" style="color: red;"></form:errors>
                      
-                     <td><form:input path="itemDetailsListConfirm[${gridRow.index}].quantity" value="${itemDetail.quantity}" /></td>
+                     <td><form:input path="userItemsDealerMapperList[${gridRow.index}].quantity" value="${itemDealerMapper.quantity}" /></td>
                    
                   
                    

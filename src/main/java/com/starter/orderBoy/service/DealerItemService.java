@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.starter.orderBoy.dao.DealerItemDao;
+import com.starter.orderBoy.entity.ItemDealerListClass;
 import com.starter.orderBoy.entity.ItemListClass;
 import com.starter.orderBoy.pojo.ItemDetails;
 import com.starter.orderBoy.pojo.UserItemsDealerMapper;
@@ -25,9 +26,9 @@ public class DealerItemService {
 	{
 		return dealerItemDao.itemFetchDetails(itemId);
 	}
-	public List<UserItemsDealerMapper> itemUploadSave(ItemListClass itemListClass)
+	public List<UserItemsDealerMapper> itemUploadSave(ItemDealerListClass itemDealerListClass)
 	{
-		return dealerItemDao.itemUploadSave(itemListClass);
+		return dealerItemDao.itemUploadSave(itemDealerListClass);
 	}
 	public UserItemsDealerMapper getDealerMapperEditValues(int itemMapId)
 	{

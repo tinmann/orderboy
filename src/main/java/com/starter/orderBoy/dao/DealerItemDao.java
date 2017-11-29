@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.starter.orderBoy.entity.ItemDealerListClass;
 import com.starter.orderBoy.entity.ItemListClass;
 import com.starter.orderBoy.pojo.HsnTable;
 import com.starter.orderBoy.pojo.ItemDetails;
@@ -77,40 +78,40 @@ public class DealerItemDao {
 		return itemDetails;
 	}
 	
-	public List<UserItemsDealerMapper> itemUploadSave(ItemListClass itemListClass)
+	public List<UserItemsDealerMapper> itemUploadSave(ItemDealerListClass itemDealerListClass)
 	{
 		
          UserPojo userObject= (UserPojo)httpSession.getAttribute("user");
 		UserPojo validUserObject = userPojoRepository.findOne(userObject.getId());
-		itemListClass.getItemDetailsListConfirm().forEach(item-> {  
-			     if(item.getHsnObject()!= null)
+		itemDealerListClass.getUserItemsDealerMapperList().forEach(itemDealerMapper-> {  
+			     if(itemDealerMapper.getItemDetails().getHsnObject()!= null)
 			     {
-			    	 if(hsnRepository.findByHsnNumber(item.getHsnObject().getHsnNumber())!= null)
+			    	 if(hsnRepository.findByHsnNumber(itemDealerMapper.getItemDetails().getHsnObject().getHsnNumber())!= null)
 			    	 {
-			    		 item.setHsnObject(hsnRepository.findByHsnNumber(item.getHsnObject().getHsnNumber()));
+			    		 itemDealerMapper.getItemDetails().setHsnObject(hsnRepository.findByHsnNumber(itemDealerMapper.getItemDetails().getHsnObject().getHsnNumber()));
 			    	 }
 			    	 else
 			    	 {
-			    		 hsnRepository.saveAndFlush(item.getHsnObject());			    		 
-			    		 item.setHsnObject(hsnRepository.findByHsnNumber(item.getHsnObject().getHsnNumber()));
+			    		 hsnRepository.saveAndFlush(itemDealerMapper.getItemDetails().getHsnObject());			    		 
+			    		 itemDealerMapper.getItemDetails().setHsnObject(hsnRepository.findByHsnNumber(itemDealerMapper.getItemDetails().getHsnObject().getHsnNumber()));
 			    	 }
 			     }
 			     else
 			     {
-			    	 item.setHsnObject(null);
+			    	 itemDealerMapper.getItemDetails().setHsnObject(null);
 			     }
 			    
 			     ItemDetails updateItem;
 			     
-			     if(itemDetailsRepository.findByName(item.getName())!=null)
+			     if(itemDetailsRepository.findByName(itemDealerMapper.getItemDetails().getName())!=null)
 			     {
-			    	 updateItem = itemDetailsRepository.findByName(item.getName());
-			    	 updateItem.setQuantity(updateItem.getQuantity()+item.getQuantity());
+			    	 updateItem = itemDetailsRepository.findByName(itemDealerMapper.getItemDetails().getName());
+			    	 updateItem.setQuantity(updateItem.getQuantity()+itemDealerMapper.getQuantity());
 			    	 if(updateItem.getHsnObject().getHsnNumber() == null || updateItem.getHsnObject().getHsnNumber() == "")
 			    	 {
-			    		 if(item.getHsnObject()!= null)
+			    		 if(itemDealerMapper.getItemDetails().getHsnObject()!= null)
 			    		 {
-			    			 updateItem.setHsnObject(item.getHsnObject());
+			    			 updateItem.setHsnObject(itemDealerMapper.getItemDetails().getHsnObject());
 			    		 }
 			    		 
 			    		 // changes here for future
@@ -119,7 +120,7 @@ public class DealerItemDao {
 			    	 if( itemsDealerMapperRepository.findByUserDetailsAndItemDetails(validUserObject.getUserDetailsPojo(), updateItem) != null)		
 					    {
 			    		 UserItemsDealerMapper userItemsDealerMapperExists = itemsDealerMapperRepository.findByUserDetailsAndItemDetails(validUserObject.getUserDetailsPojo(), updateItem);
-			    		 userItemsDealerMapperExists.setQuantity(userItemsDealerMapperExists.getQuantity()+item.getQuantity());
+			    		 userItemsDealerMapperExists.setQuantity(userItemsDealerMapperExists.getQuantity()+itemDealerMapper.getQuantity());
 			    		 itemsDealerMapperRepository.saveAndFlush(userItemsDealerMapperExists);
 					    }
 					    
@@ -128,7 +129,7 @@ public class DealerItemDao {
 					    	 UserItemsDealerMapper dealerMapper = new UserItemsDealerMapper();
 						     dealerMapper.setUserDetails(validUserObject.getUserDetailsPojo());
 						     dealerMapper.setItemDetails(updateItem);
-						     dealerMapper.setQuantity(item.getQuantity());						     
+						     dealerMapper.setQuantity(itemDealerMapper.getQuantity());						     
 					    	 itemsDealerMapperRepository.saveAndFlush(dealerMapper);
 					    }
 			    
@@ -137,10 +138,10 @@ public class DealerItemDao {
 			     {
 			    	 UserItemsDealerMapper dealerMapper = new UserItemsDealerMapper();
 				     dealerMapper.setUserDetails(validUserObject.getUserDetailsPojo());
-				     dealerMapper.setQuantity(item.getQuantity());			    	 
-			    	 itemDetailsRepository.saveAndFlush(item);
-			    	 entityManager.refresh(item);
-			    	 updateItem = itemDetailsRepository.findByName(item.getName());
+				     dealerMapper.setQuantity(itemDealerMapper.getQuantity());			    	 
+			    	 itemDetailsRepository.saveAndFlush(itemDealerMapper.getItemDetails());
+			    	 entityManager.refresh(itemDealerMapper.getItemDetails());
+			    	 updateItem = itemDetailsRepository.findByName(itemDealerMapper.getItemDetails().getName());
 			    	 dealerMapper.setItemDetails(updateItem);
 			    	 itemsDealerMapperRepository.saveAndFlush(dealerMapper);
 			    	
