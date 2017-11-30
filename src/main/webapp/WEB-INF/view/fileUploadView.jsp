@@ -55,6 +55,8 @@
                         </td>
                  </tr>
             </table>
+            
+            <a href="showUploadForm" class="nav-link"><i class="nc-icon nc-badge"></i>Upload New Items</a>
         </form:form>
 
 </html>

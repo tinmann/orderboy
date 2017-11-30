@@ -48,6 +48,8 @@
               </c:forEach>
 </table>
 
+ <a href="showUploadForm" class="nav-link"><i class="nc-icon nc-badge"></i>Upload New Items</a>
+
 <div id="myModal" class="modal">
 
   <!-- Modal content -->

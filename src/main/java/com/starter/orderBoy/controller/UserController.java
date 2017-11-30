@@ -106,7 +106,7 @@ public class UserController {
         {
         	httpSession.setAttribute("user",fetchedObject); 
         	
-        	return "redirect:userProducts";
+        	return "redirect:showUploadForm";
         	
         	
         }

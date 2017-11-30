@@ -34,7 +34,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.starter.orderBoy.entity.ItemDealerListClass;
-import com.starter.orderBoy.entity.ItemListClass;
 import com.starter.orderBoy.pojo.HsnTable;
 import com.starter.orderBoy.pojo.ItemDetails;
 import com.starter.orderBoy.pojo.UserItemsDealerMapper;
@@ -50,13 +49,6 @@ public class DealerItemController {
     @Autowired 
 	private HttpSession httpSession;
     
-    @RequestMapping(value = "/ssnItemList", method = RequestMethod.GET, produces="application/json")
-    public @ResponseBody List<ItemDetails> ssnItemList(@RequestParam("ssnNumber") String ssnNumber)
-    {
-    	List<ItemDetails> returnedList = dealerItemService.ssnItemDetails(ssnNumber);
-
-    	return returnedList;
-    }
     
     @RequestMapping(value = "/itemFetchDetails", method = RequestMethod.GET, produces="application/json")
     public @ResponseBody ItemDetails itemFetchDetails(@RequestParam("itemId") int itemId)

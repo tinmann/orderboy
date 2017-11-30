@@ -13,7 +13,9 @@
         <tr>
             <td><input type="submit" value="Submit" /></td>
         </tr>
+        
+        
     </table>
-
+<a href="addUserItemUpload" class="nav-link"><i class="nc-icon nc-badge"></i>Show My Items</a>
 </form:form>
 </html>
