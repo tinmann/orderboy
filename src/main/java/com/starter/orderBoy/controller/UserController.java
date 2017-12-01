@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,15 +53,7 @@ public class UserController {
     public ModelAndView showForm() {
         return new ModelAndView("userHome", "userDetailsPojo", new UserDetailsPojo());
     }
-   /* @RequestMapping(value = "/userDetails", method = RequestMethod.GET)
-    public String showForm(ModelMap map) {
-    	
-    	map.addAttribute("userPojo", new UserPojo());
-    	map.addAttribute("userDetailsPojo", new UserDetailsPojo());
-    	
-        return "employeeHome";
-    }*/
- 
+  
     @RequestMapping(value = "/addUserDetails", method = {RequestMethod.GET,RequestMethod.POST})
     public String submit(@Valid @ModelAttribute("userDetailsPojo") UserDetailsPojo userDetailsPojo, 
       BindingResult result,ModelMap model) {
@@ -231,6 +224,55 @@ public class UserController {
         return new ModelAndView("userLogin", "userPojo", new UserPojo());
     }
     
+    
+    @GetMapping(value = "/mobileUserLoginForm")
+   	public ResponseEntity<UserPojo> getMobileLoginForm() {
+   		return new ResponseEntity<UserPojo>(new UserPojo(), HttpStatus.OK);
+   	}
+    
+    @PostMapping(value = "/mobileUserLoginForm")
+	public ResponseEntity<Void> getLoginDetails(@RequestBody UserPojo userPojo, UriComponentsBuilder builder,BindingResult result) {
+               
+                HttpHeaders headers = new HttpHeaders();
+               
+                if (result.hasErrors()) {
+                	return new ResponseEntity<Void>(headers,HttpStatus.UNAUTHORIZED);
+                }      
+                
+                try
+                {
+                UserPojo fetchedObject =  userService.loginUser(userPojo); 
+                
+
+                
+                if(fetchedObject!=null)
+                {
+                	httpSession.setAttribute("user",fetchedObject); 
+                	
+                	
+                	/// to change
+                	return new ResponseEntity<Void>(headers,HttpStatus.OK);
+                	//headers.setLocation(builder.path("/article/{id}").buildAndExpand(article.getArticleId()).toUri());
+                	
+                	
+                }
+                else
+                {
+                	return new ResponseEntity<Void>(headers,HttpStatus.UNAUTHORIZED);
+                }
+                }
+                catch(Exception ex)
+                {
+                	return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+                }
+	}
+    
+    
+    
+    @GetMapping("/mobileUserRegForm")
+	public ResponseEntity<UserDetailsPojo> getMobileRegForm() {
+		return new ResponseEntity<UserDetailsPojo>(new UserDetailsPojo(), HttpStatus.OK);
+	}
     
     
     
