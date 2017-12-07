@@ -69,7 +69,7 @@
 	           </tr>
 	       </table>
 	       <div class="footer register-footer text-center">
-				<h6>&copy; <script>document.write(new Date().getFullYear())</script>, Powered By <a href="home.jsp">Orderboy</a></h6>
+				<h6>&copy; <script>document.write(new Date().getFullYear())</script>, Developed By <a href="home.jsp">SDYL</a></h6>
 			</div>
   			</body>
 	        <script type="text/javascript" href="js/bootstrap.min.js" ></script>
