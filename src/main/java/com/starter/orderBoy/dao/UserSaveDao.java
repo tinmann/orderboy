@@ -18,6 +18,7 @@ import com.starter.orderBoy.entity.ItemCheckedListPojo;
 import com.starter.orderBoy.entity.ItemCheckedPojo;
 
 import com.starter.orderBoy.entity.SearchItems;
+import com.starter.orderBoy.pojo.AddressPojo;
 import com.starter.orderBoy.pojo.ItemDetails;
 import com.starter.orderBoy.pojo.UserDetailsPojo;
 import com.starter.orderBoy.pojo.UserItemsDealerMapper;
@@ -62,6 +63,11 @@ public class UserSaveDao {
 		UserPojo userPojo= userDetailsPojo.getUserPojo();
 		userPojo.setUserDetailsPojo(userDetailsPojo);
 		userDetailsPojo.setUserPojo(userPojo);
+		
+		AddressPojo addressPojo = userDetailsPojo.getAddress();
+		addressPojo.setUserDetailsPojo(userDetailsPojo);
+		userDetailsPojo.setAddress(addressPojo);
+		
 		
 		userDetailsPojoRepository.saveAndFlush(userDetailsPojo);
 		entityManager.refresh(userDetailsPojo);

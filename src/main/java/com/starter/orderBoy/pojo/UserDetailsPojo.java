@@ -30,7 +30,10 @@ public class UserDetailsPojo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID")
     private long id;
- 
+    
+    @Valid
+    @Column(name = "COMPANY_NAME")
+    private String companyName;
  
     @NotBlank(message = "Please enter the First Name")
     @Valid
@@ -49,12 +52,47 @@ public class UserDetailsPojo {
     @Column(name = "TYPE")
     private String type;
     
+    @Valid
+    @Column(name = "OWNERSHIP_TYPE")
+    private String ownershipType;
+    
     @Column(name = "STATUS")
     private String status;
+    
+    @Valid 
+    @Column(name="PHONE_LAND")
+    private String phoneLand;
+    
+    @Valid
+    @Column(name="PHONE_MOBILE")
+    private String phoneMobile;
+    
+    @Valid
+    @Column(name="GSTIN_NO")
+    private String gstnNo;
+    
+    @Valid
+    @Column(name="LICENCE_NO")
+    private String licenceNo;
+    
+    @Valid
+    @Column(name="CIN_NO")
+    private String cinNo;
  
     @Valid
     @OneToOne(mappedBy="userDetailsPojo", cascade = CascadeType.ALL)
     private UserPojo userPojo;
+    
+    @Valid
+    @OneToOne(mappedBy="userDetailsPojo", cascade = CascadeType.ALL)
+    private AddressPojo address;
+    
+    @Valid
+    @Column(name="EMAIL")
+    private String email;
+    
+    
+    
     
  /*  @ManyToMany(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(name = "USER_SHOP_ITEMS_MAPPER", 
@@ -166,6 +204,116 @@ public class UserDetailsPojo {
 	public void setUserItemsRetailerMapper(List<UserItemsRetailerMapper> userItemsRetailerMapper) {
 		this.userItemsRetailerMapper = userItemsRetailerMapper;
 	}
+
+
+
+	public AddressPojo getAddress() {
+		return address;
+	}
+
+
+
+	public void setAddress(AddressPojo address) {
+		this.address = address;
+	}
+
+
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+
+
+	public String getOwnershipType() {
+		return ownershipType;
+	}
+
+
+
+	public void setOwnershipType(String ownershipType) {
+		this.ownershipType = ownershipType;
+	}
+
+
+
+	public String getPhoneLand() {
+		return phoneLand;
+	}
+
+
+
+	public void setPhoneLand(String phoneLand) {
+		this.phoneLand = phoneLand;
+	}
+
+
+
+	public String getPhoneMobile() {
+		return phoneMobile;
+	}
+
+
+
+	public void setPhoneMobile(String phoneMobile) {
+		this.phoneMobile = phoneMobile;
+	}
+
+
+
+	public String getGstnNo() {
+		return gstnNo;
+	}
+
+
+
+	public void setGstnNo(String gstnNo) {
+		this.gstnNo = gstnNo;
+	}
+
+
+
+	public String getLicenceNo() {
+		return licenceNo;
+	}
+
+
+
+	public void setLicenceNo(String licenceNo) {
+		this.licenceNo = licenceNo;
+	}
+
+
+
+	public String getCinNo() {
+		return cinNo;
+	}
+
+
+
+	public void setCinNo(String cinNo) {
+		this.cinNo = cinNo;
+	}
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 
  
 }

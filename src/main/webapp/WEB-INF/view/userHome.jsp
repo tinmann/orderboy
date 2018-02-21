@@ -27,7 +27,7 @@
 	                    <a href="/loginUserForm" class="nav-link"><i class="nc-icon nc-single-02"></i>SignIn</a>
 	                </li>
 	                <li class="nav-item">
-	                    <a href="#" target="_blank" class="nav-link"><i class="nc-icon nc-book-bookmark"></i>  Usermanual</a>
+	                    <a href="#" target="_blank" class="nav-link"><i class="nc-icon nc-book-bookmark"></i>  User Manual</a>
 	                </li>
 	            </ul>
 	        </div>
@@ -43,11 +43,14 @@
 	                            <div class="card card-register">
 	                                <h3 class="title">Registration</h3>									
 	                                <form class="register-form">
-	                                    <label>Firstname</label>
-	                                    <form:input path="firstName" type="text" class="form-control" placeholder="Enter Firstname" />
+	                                    <label>Company Name</label>
+	                                    <form:input path="companyName" type="text" class="form-control" placeholder="Enter Company Name" />
+										<form:errors path="companyName" style="color: red;" />
+	                                    <label>First Name</label>
+	                                    <form:input path="firstName" type="text" class="form-control" placeholder="Enter First Name" />
 										<form:errors path="firstName" style="color: red;" />
-	                                    <label>Lastname</label>
-	                                    <form:input path="lastName" type="text" class="form-control" placeholder="Enter Lastname" />
+	                                    <label>Last Name</label>
+	                                    <form:input path="lastName" type="text" class="form-control" placeholder="Enter Last Name" />
 										<form:errors path="lastName" style="color: red;" />
 	                                    <label>Type</label>
 	                                    <form:select path="type" selected="type" class="form-control">
@@ -56,6 +59,62 @@
 					                       	<option value="Retailer">Retailer</option>
 				                        </form:select>
                         				<form:errors path="type" style="color: red;"></form:errors>
+                        				
+                        				<label>Ownership Type</label>
+	                                    <form:select path="ownershipType" selected="ownershipType" class="form-control">
+	                                     	<option value="">--- Select ---</option>
+					                       	<option value="INDIVIDUAL">INDIVIDUAL</option>
+					                       	<option value="HUF">HUF</option>
+					                       	<option value="PARTNERSHIP FIRM">PARTNERSHIP FIRM</option>					                
+					                       	<option value="COMPANY">COMPANY</option>
+					                       	<option value="AOP">AOP</option>
+				                        </form:select>
+                        				<form:errors path="ownershipType" style="color: red;"></form:errors>
+                        				
+                        				<label>Address</label>
+                        				
+                        				<label>State</label>
+	                                    <form:input path="address.state" type="text" class="form-control" placeholder="Enter the State" />
+										<form:errors path="address.state" style="color: red;" />
+										<label>City</label>
+	                                    <form:input path="address.city" type="text" class="form-control" placeholder="Enter the City" />
+										<form:errors path="address.city" style="color: red;" />
+										<label>Area</label>
+	                                    <form:input path="address.area" type="text" class="form-control" placeholder="Enter the Area" />
+										<form:errors path="address.area" style="color: red;" />
+										<label>Pincode</label>
+	                                    <form:input path="address.pinCode" type="text" class="form-control" placeholder="Enter the Pincode" />
+										<form:errors path="address.pinCode" style="color: red;" />
+										
+                        				
+                        				
+                        				
+                        				<label>Land Number</label>
+	                                    <form:input path="phoneLand" type="text" class="form-control" placeholder="Enter Landline Number" />
+										<form:errors path="phoneLand" style="color: red;" />
+										
+										<label>Mobile Number</label>
+	                                    <form:input path="phoneMobile" type="text" class="form-control" placeholder="Enter Mobile Number" />
+										<form:errors path="phoneMobile" style="color: red;" />
+										
+										<label>Email</label>
+	                                    <form:input path="email" type="text" class="form-control" placeholder="Enter Email" />
+										<form:errors path="email" style="color: red;" />
+                        				
+										
+										<label>GSTIN Number</label>
+	                                    <form:input path="gstnNo" type="text" class="form-control" placeholder="Enter GSTIN Number" />
+										<form:errors path="gstnNo" style="color: red;" />
+										
+										<label>Licence Number</label>
+	                                    <form:input path="licenceNo" type="text" class="form-control" placeholder="Enter Licence Number" />
+										<form:errors path="licenceNo" style="color: red;" />
+										
+										<label>CIN Number</label>
+	                                    <form:input path="cinNo" type="text" class="form-control" placeholder="Enter CIN Number" />
+										<form:errors path="cinNo" style="color: red;" />
+										
+										
                         				<label>Password</label>
 	                                    <form:input path="userPojo.password" type="password" class="form-control" />
 	                                    <form:errors path="userPojo.password" style="color: red;" />
