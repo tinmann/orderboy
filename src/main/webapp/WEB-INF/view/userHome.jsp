@@ -2,10 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <link rel="stylesheet" href="css/bootstrap.min.css" />				
-			<link rel="stylesheet" href="css/paper-kit.css" />	
-			<link rel="stylesheet" href="css/nucleo-icons.css" />
-			<link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
-			<link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+			
 	        <head>
 	            <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	            <title>Login</title>	           
@@ -132,13 +129,6 @@
 			</div> -->
 	        </form:form>	
   			</body>
-	        <script type="text/javascript" href="js/bootstrap.min.js" ></script>
-	        <script type="text/javascript" href="js/paper-kit.js" ></script>
-	        <script type="text/javascript" href="js/jquery-3.2.1.js" ></script>
-	        <script type="text/javascript" href="js/moment.min.js" ></script>
-	        <script type="text/javascript" href="js/nouislider.js" ></script>
-	        <script type="text/javascript" href="js/bootstrap-switch.min.js" ></script>
-	        <script type="text/javascript" href="js/popper.js" ></script>
-	        <script type="text/javascript" href="js/jquery-ui-1.12.1.custom.min.js" ></script>
+	        
 	
 </html>
