@@ -47,5 +47,9 @@ public class UserService {
 	{
 		return userSaveDao.getPreviousItemDetailsForRetailer();
 	}
+	public UserDetailsPojo editUserDetailsUser(UserDetailsPojo userDetailsPojo)
+	{
+		return userSaveDao.editUserDetailsUser(userDetailsPojo);
+	}
 
 }

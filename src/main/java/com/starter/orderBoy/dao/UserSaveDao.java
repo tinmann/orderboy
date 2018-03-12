@@ -195,4 +195,12 @@ public class UserSaveDao {
 		return previousUserItemRetailerMapperList;
 	}
 	
+	public UserDetailsPojo editUserDetailsUser(UserDetailsPojo userDetailsPojo)
+	{
+		userDetailsPojoRepository.saveAndFlush(userDetailsPojo);
+		entityManager.refresh(userDetailsPojo);
+		
+		return userDetailsPojo;
+	}
+	
 }

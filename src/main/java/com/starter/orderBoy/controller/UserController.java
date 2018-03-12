@@ -53,6 +53,39 @@ public class UserController {
     public ModelAndView showForm() {
         return new ModelAndView("userHome", "userDetailsPojo", new UserDetailsPojo());
     }
+    
+    @RequestMapping(value="/editUserDetailsGet", method = RequestMethod.GET)
+    public ModelAndView editUserDetailsGet()
+    {
+    	 
+    	 return new ModelAndView("editUserDetails", "userDetailsPojo", ((UserPojo)httpSession.getAttribute("user")).getUserDetailsPojo());
+    			 
+    }
+    
+    @RequestMapping(value = "/editUserDetailsPost", method = RequestMethod.POST)
+    public String editUserDetailsPost(@Valid @ModelAttribute("userDetailsPojo") UserDetailsPojo userDetailsPojo, 
+    	      BindingResult result,ModelMap model) {
+    	
+    	if (result.hasErrors()) {
+            return "editUserDetails";
+        }     
+        try
+        {
+        	 UserDetailsPojo userDetailsPojoNew =  userService.editUserDetailsUser(userDetailsPojo);      
+             model.addAttribute("userObj",userDetailsPojoNew.getUserPojo());
+             model.addAttribute("firstName", userDetailsPojoNew.getFirstName());
+             model.addAttribute("lastName", userDetailsPojoNew.getLastName());
+             model.addAttribute("type", userDetailsPojoNew.getType());
+             model.addAttribute("message", "Successfully Edited");
+             return "editSuccessMessage";
+        }
+    
+        catch(Exception ex)
+        {
+        	return "editUserDetails";
+        }
+    	
+    }
   
     @RequestMapping(value = "/addUserDetails", method = {RequestMethod.GET,RequestMethod.POST})
     public String submit(@Valid @ModelAttribute("userDetailsPojo") UserDetailsPojo userDetailsPojo, 
