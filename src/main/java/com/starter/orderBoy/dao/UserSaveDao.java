@@ -24,6 +24,7 @@ import com.starter.orderBoy.pojo.UserDetailsPojo;
 import com.starter.orderBoy.pojo.UserItemsDealerMapper;
 import com.starter.orderBoy.pojo.UserItemsRetailerMapper;
 import com.starter.orderBoy.pojo.UserPojo;
+import com.starter.orderBoy.repository.AddressPojoRepository;
 import com.starter.orderBoy.repository.ItemDetailsRepository;
 import com.starter.orderBoy.repository.ItemsDealerMapperRepository;
 import com.starter.orderBoy.repository.ItemsRetailerMapperRepository;
@@ -40,6 +41,9 @@ public class UserSaveDao {
 	
 	@Autowired
 	private HttpSession httpSession;
+	
+	@Autowired
+	private AddressPojoRepository addressPojoRepository;
 	
 	@Autowired
 	private UserDetailsPojoRepository userDetailsPojoRepository;
@@ -71,6 +75,8 @@ public class UserSaveDao {
 		
 		userDetailsPojoRepository.saveAndFlush(userDetailsPojo);
 		entityManager.refresh(userDetailsPojo);
+		/*addressPojo.setUserDetailsPojo(userDetailsPojo);
+		addressPojoRepository.saveAndFlush(addressPojo);*/
 		
 		return userDetailsPojo;
 	}

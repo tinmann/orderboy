@@ -9,14 +9,20 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.Valid;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 @Entity
 @Table(name="ADDRESS")
 
 public class AddressPojo {
 	
-	@Id
-    @GeneratedValue
-    @Column(name = "ADDRESS_ID")
+	
+	 @Valid
+	 @Id
+	 @Column(name="ADDRESS_ID")
+	 @GeneratedValue(generator="gen")
+	 @GenericGenerator(name="gen", strategy="foreign",parameters=@Parameter(name="property", value="userDetailsPojo"))
 	private long addressId;
 	
 	@Valid
