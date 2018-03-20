@@ -197,6 +197,9 @@ public class UserSaveDao {
 	
 	public UserDetailsPojo editUserDetailsUser(UserDetailsPojo userDetailsPojo)
 	{
+		System.out.println("ooooooooooooooooooooooooooooooo");
+		System.out.println(userDetailsPojo.getId());
+		System.out.println("ooooooooooooooooooooooooooooooo");
 		userDetailsPojoRepository.saveAndFlush(userDetailsPojo);
 		entityManager.refresh(userDetailsPojo);
 		
