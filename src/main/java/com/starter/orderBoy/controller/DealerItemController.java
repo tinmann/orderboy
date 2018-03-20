@@ -65,6 +65,13 @@ public class DealerItemController {
         
     }
     
+    @RequestMapping(value = "/showAdminHome", method = RequestMethod.GET)
+    public String showAdminHome() {
+        return "admin/adminHome";
+       
+        
+    }
+    
     @RequestMapping(value = "/uploadItemFile", method = {RequestMethod.GET,RequestMethod.POST})
     public String submitUploadFile(@RequestParam("file") MultipartFile file, ModelMap modelMap,RedirectAttributes redirectAttributes) throws IOException{
       

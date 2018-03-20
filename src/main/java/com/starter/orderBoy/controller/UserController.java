@@ -114,6 +114,11 @@ public class UserController {
         return new ModelAndView("userLogin", "userPojo", new UserPojo());
     }
     
+    @RequestMapping(value = "/forgetPassForm", method = RequestMethod.GET)
+    public ModelAndView forgetPassForm() {
+        return new ModelAndView("forgotPassword", "userPojo", new UserPojo());
+    }
+    
     @RequestMapping(value = "/loginUser", method = {RequestMethod.GET,RequestMethod.POST})
     public String loginUser(@Valid @ModelAttribute("userPojo") UserPojo userPojo, 
       BindingResult result,ModelMap model)
@@ -132,7 +137,7 @@ public class UserController {
         {
         	httpSession.setAttribute("user",fetchedObject); 
         	
-        	return "redirect:showUploadForm";
+        	return "redirect:showAdminHome";
         	
         	
         }
