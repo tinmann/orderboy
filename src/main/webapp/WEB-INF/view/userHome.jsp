@@ -31,7 +31,7 @@
 								 
 			                    	<div class="wizard-header text-center">
 			                        	<h3 class="wizard-title">Create your company profile</h3>
-										<p class="category">This information is for login and varification purpose.</p>
+										<p class="category">This information is for login and verification purpose.</p>
 			                    	</div>
 	
 									<div class="wizard-navigation">
@@ -89,7 +89,7 @@
 												</div>
 												<div class="form-group">
 													<label>Password <small>(required)</small></label>
-													<form:input path="userPojo.password" type="password" class="form-control"  placeholder="Your Password..."/>
+													<form:input path="userPojo.password" id="password" type="password" class="form-control"  placeholder="Your Password..."/>
 				                                    <form:errors path="userPojo.password" style="color: red;" />
 				                                    <form:hidden path="userPojo.loginId" value ="1"/>
 												</div>
@@ -224,7 +224,7 @@
 		                                    <div class="col-sm-5 col-sm-offset-1">
 		                                        <div class="form-group">
 		                                           <label>ZIP Code <small>(required)</small></label>
-	                                    			<form:input path="address.pinCode" type="text" class="form-control" placeholder="Enter your Pincode..." />
+	                                    			<form:input path="address.pinCode" value="" type="text" class="form-control" placeholder="Enter your Pincode..." />
 		                                        </div>
 		                                    </div>
 		                                    <div class="col-sm-5 ">

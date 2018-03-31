@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="ADDRESS")
@@ -25,22 +26,26 @@ public class AddressPojo {
 	 @GenericGenerator(name="gen", strategy="foreign",parameters=@Parameter(name="property", value="userDetailsPojo"))
 	private long addressId;
 	
+    @NotBlank(message = "Please enter the State")
 	@Valid
 	@Column(name="STATE")
 	private String state;
 	
-
+    @NotBlank(message = "Please select the Country")
 	@Column(name="COUNTRY")
 	private String country;
 	
+    @NotBlank(message = "Please enter the City")
 	@Valid
 	@Column(name="CITY")
 	private String city;
 	
+  //  @NotBlank(message = "Please enter the State")
 	@Valid
 	@Column(name="AREA")
 	private String area;
 	
+  //  @NotBlank(message = "Please enter the Pincode")
 	@Valid
 	@Column(name="PINCODE")
 	private int pinCode;

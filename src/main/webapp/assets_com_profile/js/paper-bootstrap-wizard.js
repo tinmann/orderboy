@@ -62,7 +62,28 @@ transparent = true;
         		    },
         		    email: {
         		      required: true
-        		    }
+        		    },
+        		    "userPojo.password":{
+        		      required: true
+        		    },
+        		    "address.area": {
+          		      required: true
+          		    },
+          		  "address.city": {
+        		      required: true
+        		    },
+        		    "address.state": {
+          		      required: true
+          		    },
+          		  "address.pinCode": {
+        		      required: true,
+        		      maxlength: 6,
+      		    	minlength: 6
+        		    }/*,
+        		    "address.area": {
+          		      required: true
+          		   
+          		    }*/
                 },
         	});
 
