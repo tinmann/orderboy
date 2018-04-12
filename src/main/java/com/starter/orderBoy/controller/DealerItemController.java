@@ -349,7 +349,7 @@ public class DealerItemController {
         
         
         
-        return "yourItemList";
+        return "admin/adminHome";
     }
     
     // ResponseEntity
