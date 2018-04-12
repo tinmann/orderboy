@@ -177,7 +177,9 @@
 							
 							<div class="row">
 									<div class="col-xl-12">									
-									Content here
+										
+										<%@include file="../yourItemList.jsp" %>
+										
 									</div>
 							</div>
 
