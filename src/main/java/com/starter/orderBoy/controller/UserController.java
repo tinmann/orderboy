@@ -67,6 +67,9 @@ public class UserController {
     	      BindingResult result,ModelMap model) {
     	
     	if (result.hasErrors()) {
+    		System.out.println("was here");
+    		System.out.println(result.toString());
+    		
             return "editUserDetails";
         }     
         try

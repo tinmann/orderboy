@@ -197,6 +197,8 @@ public class UserSaveDao {
 	
 	public UserDetailsPojo editUserDetailsUser(UserDetailsPojo userDetailsPojo)
 	{
+		
+		userDetailsPojo.setStatus("ACTIVE");
 		System.out.println("ooooooooooooooooooooooooooooooo");
 		System.out.println(userDetailsPojo.getId());
 		System.out.println("ooooooooooooooooooooooooooooooo");

@@ -30,7 +30,7 @@
 	        </div>
 		</div>
     </nav>
-     <form:form method="POST" action="/addUserDetails" modelAttribute="userDetailsPojo">
+     <form:form method="POST" action="/editUserDetailsPost" modelAttribute="userDetailsPojo">
 	    <div class="wrapper">
 	        <div class="page-header" style="background-image: url('../img/worldmap.jpg');">
 	            <div class="filter"></div>
@@ -79,6 +79,9 @@
 										<label>Area</label>
 	                                    <form:input path="address.area" type="text" class="form-control" placeholder="Enter the Area" />
 										<form:errors path="address.area" style="color: red;" />
+										<label>Country</label>
+	                                    <form:input path="address.country" type="text" class="form-control" placeholder="Enter the Country" />
+										<form:errors path="address.country" style="color: red;" />
 										<label>Pincode</label>
 	                                    <form:input path="address.pinCode" type="text" class="form-control" placeholder="Enter the Pincode" />
 										<form:errors path="address.pinCode" style="color: red;" />
@@ -115,7 +118,7 @@
                         				<label>Password</label>
 	                                    <form:input path="userPojo.password" type="password" class="form-control" />
 	                                    <form:errors path="userPojo.password" style="color: red;" />
-	                                    <form:hidden path="userPojo.loginId" value ="1"/>
+	                                     <form:hidden path="userPojo.loginId" value ="userPojo.loginId"/> 
 	                                    <input type="submit" value="Submit" class="btn btn-danger btn-block btn-round" />
 	                                </form>		                                                                	                                
 	                            </div>
