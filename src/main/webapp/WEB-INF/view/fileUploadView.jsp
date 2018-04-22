@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <link rel="stylesheet" href="css/style.css" />
-<h2>Submitted File</h2>
+<h2>Confirm Items Submission</h2>
 <table>
     <tr>
         <td>OriginalFileName:</td>
