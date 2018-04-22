@@ -78,6 +78,11 @@ public class DealerItemDao {
 		return itemDetails;
 	}
 	
+	/*public List<UserItemsDealerMapper> itemUploadSave()
+	{
+		
+	}
+	*/
 	public List<UserItemsDealerMapper> itemUploadSave(ItemDealerListClass itemDealerListClass)
 	{
 		
@@ -138,6 +143,8 @@ public class DealerItemDao {
 			     {
 			    	 UserItemsDealerMapper dealerMapper = new UserItemsDealerMapper();
 				     dealerMapper.setUserDetails(validUserObject.getUserDetailsPojo());
+				   int a=  itemDealerMapper.getQuantity();
+				   String b =   itemDealerMapper.getItemDetails().getName();
 				     dealerMapper.setQuantity(itemDealerMapper.getQuantity());			    	 
 			    	 itemDetailsRepository.saveAndFlush(itemDealerMapper.getItemDetails());
 			    	 entityManager.refresh(itemDealerMapper.getItemDetails());

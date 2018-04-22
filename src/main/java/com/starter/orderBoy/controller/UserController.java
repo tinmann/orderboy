@@ -140,7 +140,8 @@ public class UserController {
         {
         	httpSession.setAttribute("user",fetchedObject); 
         	
-        	return "redirect:showAdminHome";
+        	//return "redirect:userProducts";
+        	 return "redirect:addUserItemUpload";
         	
         	
         }
@@ -158,8 +159,8 @@ public class UserController {
       
     }
     
-    @RequestMapping(value = "/userProducts", method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView userProducts() {
+   /* @RequestMapping(value = "/userProducts", method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView userProducts(ModelMap model) {
     	
     	System.out.println("new reached");
     	
@@ -167,8 +168,8 @@ public class UserController {
        
     	SearchItems searchItems = new SearchItems();
     	
-    	/*try
-    	{*/
+    	try
+    	{
     	
     	List<ItemCheckedPojo> formDeliverList = new ArrayList<ItemCheckedPojo>();
     	
@@ -230,20 +231,23 @@ public class UserController {
     	
     	
     	
-    	/*}
+    	}
     	
     	catch(Exception ex)
     	{
     		return new ModelAndView("productPage", "itemCheckedListPojo", itemCheckedListPojo);
-    	}*/
+    	}
     
+    	model.addAttribute("listItems", "listItems");
+    	model.addAttribute("itemCheckedListPojo", "itemCheckedListPojo");
     	
-    	return new ModelAndView("productPage", "itemCheckedListPojo", itemCheckedListPojo);
+    	return new ModelAndView("admin/adminHome", "itemCheckedListPojo", itemCheckedListPojo);
+    	//return "admin/adminHome";
     	
       
-    }
+    }*/
     
-    @RequestMapping(value = "/addUserItem", method = {RequestMethod.GET,RequestMethod.POST})
+  /*  @RequestMapping(value = "/addUserItem", method = {RequestMethod.GET,RequestMethod.POST})
     public String addUserItem(@Valid @ModelAttribute("itemCheckedListPojo") ItemCheckedListPojo itemCheckedListPojo, 
       BindingResult result,ModelMap model)
     {
@@ -256,9 +260,10 @@ public class UserController {
     	
     	String success = userService.addUserItem(itemCheckedListPojo);
     	
+    	
     	return "redirect:userProducts";
     }
-    
+    */
     @RequestMapping(value = "/logOutUser", method = RequestMethod.GET)
     public ModelAndView userLogOut() {    	
     	httpSession.invalidate();

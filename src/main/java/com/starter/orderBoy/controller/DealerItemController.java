@@ -59,15 +59,20 @@ public class DealerItemController {
     }
     
     @RequestMapping(value = "/showUploadForm", method = RequestMethod.GET)
-    public String showUploadForm() {
-        return "uploadItemList";
+    public String showUploadForm(ModelMap model) {
+    	
+    	model.addAttribute("uploadPage","uploadPage");
+       // return "uploadItemList";
+        return "admin/adminHome";
        
         
     }
     
     @RequestMapping(value = "/showAdminHome", method = RequestMethod.GET)
     public String showAdminHome() {
-        return "admin/adminHome";
+    	
+    	// return "redirect:userProducts";
+    	 return "redirect:addUserItemUpload";
        
         
     }
@@ -315,7 +320,9 @@ public class DealerItemController {
     public String fileUploadViewGet(@Valid @ModelAttribute("editItemForm") ItemDealerListClass itemDealerListClass, 
   	      BindingResult result,ModelMap model) {
     	 // return "redirect:addUserItemUpload";
-    	return "fileUploadView";
+    	model.addAttribute("selectPage","fileUploadView");
+    	//return "fileUploadView";
+    	return "admin/adminHome";
     	
     }
     
@@ -342,6 +349,8 @@ public class DealerItemController {
         
         List<UserItemsDealerMapper> itemDetailsMappedObj = dealerItemService.itemUploadSave(itemDealerListClass);
         
+        
+        model.addAttribute("itemListAfterUpload", "itemListAfterUpload");
         model.addAttribute("itemDetailsMappedObj", itemDetailsMappedObj);
         
         System.out.println("valid");

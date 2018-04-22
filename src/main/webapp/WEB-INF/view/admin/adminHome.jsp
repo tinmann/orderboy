@@ -1,5 +1,8 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-    <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ page import = "com.starter.orderBoy.pojo.UserPojo"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -7,6 +10,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				
 		<title>OrderBoy &mdash; Admin Dashboard</title>
+		
+		<%
+           UserPojo userObject= (UserPojo)session.getAttribute("user");
+        %>
+
+
+
+
 
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="#">
@@ -93,7 +104,7 @@
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                                 <!-- item-->
                                 <div class="dropdown-item noti-title">
-                                    <h5 class="text-overflow"><small>Hello, admin</small> </h5>
+                                    <h5 class="text-overflow"><small>Hello, <%= userObject.getUserDetailsPojo().getFirstName() %></small> </h5>
                                 </div>
 
                                 <!-- item-->
@@ -102,8 +113,9 @@
                                 </a>
 
                                 <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">
-                                    <i class="fa fa-power-off"></i> <span>Logout</span>
+                                <a href="/logOutUser" class="dropdown-item notify-item">
+                                    <i class="fa fa-power-off"></i> <span>LogOut</span>
+                                   
                                 </a>
 								
                             </div>
@@ -176,9 +188,26 @@
 
 							
 							<div class="row">
-									<div class="col-xl-12">									
+									<div class="col-xl-12">							
+                                     
+                                     <c:if test = "${itemListAfterUpload=='itemListAfterUpload'}">
+                                     <%@include file="../yourItemList.jsp" %>
+                                     </c:if>
+									
+									<c:if test = "${uploadPage=='uploadPage'}">
+                                     <%@include file="../uploadItemList.jsp" %>
+                                     </c:if>
+                                     
+                                     <c:if test = "${selectPage=='fileUploadView'}">
+                                     <%@include file="../fileUploadView.jsp" %>
+                                     </c:if>
+                                     
+									
+									
+									
+																
 										
-										<%@include file="../yourItemList.jsp" %>
+										
 										
 									</div>
 							</div>
