@@ -39,7 +39,7 @@
 									</div>
 								</div>
 								<div class="footer">
-									Copyright &copy; <script>document.write(new Date().getFullYear())</script>, Developed By <a href="#">OrderBoy</a>
+									Copyright &copy; <script>document.write(new Date().getFullYear())</script> | Developed By <a href="#">OrderBoy</a>
 								</div>
 							</div>
 						</div>

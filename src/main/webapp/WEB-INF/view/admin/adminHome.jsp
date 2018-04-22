@@ -87,7 +87,8 @@
 
                         <li class="list-inline-item dropdown notif">
                             <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="#" alt="Profile image" class="avatar-rounded">
+                            	<i class="fa fa-fw fa-user-circle"></i><span></span>
+                                <!-- <img src="#" alt="" class="avatar-rounded"> -->
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                                 <!-- item-->
@@ -134,7 +135,7 @@
 			<ul>
 
 					<li class="submenu">
-						<a href="/showAdminHome"><i class="fa fa-fw fa-bars"></i><span> Dashboard </span> </a>
+						<a href="/showAdminHome"><i class="fa fa-fw fa-tachometer"></i><span> Dashboard </span> </a>
                     </li>					
 					
             </ul>
@@ -176,7 +177,9 @@
 							
 							<div class="row">
 									<div class="col-xl-12">									
-									Content here
+										
+										<%@include file="../yourItemList.jsp" %>
+										
 									</div>
 							</div>
 

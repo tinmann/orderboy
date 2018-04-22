@@ -259,7 +259,7 @@
 		</div> <!--  big container -->
 	<div class="footer">
 	        <div class="container text-center">
-	            Copyright &copy; <script>document.write(new Date().getFullYear())</script>, Developed By <a href="#">OrderBoy</a>
+	            Copyright &copy; <script>document.write(new Date().getFullYear())</script> | Developed By <a href="#">OrderBoy</a>
 	        </div>
 	    </div>
 	</div>
