@@ -51,5 +51,10 @@ public class UserService {
 	{
 		return userSaveDao.editUserDetailsUser(userDetailsPojo);
 	}
+	
+	public UserDetailsPojo getUserDetailsToEdit(long userDetailsId)
+	{
+		return userSaveDao.getUserDetailsToEdit(userDetailsId);
+	}
 
 }

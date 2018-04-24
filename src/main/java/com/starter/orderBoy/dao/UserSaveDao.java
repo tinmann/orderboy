@@ -195,17 +195,29 @@ public class UserSaveDao {
 		return previousUserItemRetailerMapperList;
 	}
 	
+	public UserDetailsPojo getUserDetailsToEdit(long userDetailsId)
+	{
+		return userDetailsPojoRepository.findOne(userDetailsId);
+	}
+	
 	public UserDetailsPojo editUserDetailsUser(UserDetailsPojo userDetailsPojo)
 	{
-		
+		UserDetailsPojo updatedUserDetailsPojo = null;
+		try
+		{
 		userDetailsPojo.setStatus("ACTIVE");
-		System.out.println("ooooooooooooooooooooooooooooooo");
-		System.out.println(userDetailsPojo.getId());
-		System.out.println("ooooooooooooooooooooooooooooooo");
 		userDetailsPojoRepository.saveAndFlush(userDetailsPojo);
-		entityManager.refresh(userDetailsPojo);
+		//entityManager.refresh(userDetailsPojo);
+	    updatedUserDetailsPojo = userDetailsPojoRepository.findOne(userDetailsPojo.getId());
 		
-		return userDetailsPojo;
+		System.out.println("success");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return updatedUserDetailsPojo;
 	}
 	
 }

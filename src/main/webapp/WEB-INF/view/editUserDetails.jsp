@@ -8,38 +8,18 @@
 	            <title>Login</title>	           
 	        </head>
 	        <body>	
-	        <nav class="navbar navbar-expand-md fixed-top navbar-transparent">
-        	<div class="container">
-			<div class="navbar-translate">
-	            <button class="navbar-toggler navbar-toggler-right navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-bar"></span>
-					<span class="navbar-toggler-bar"></span>
-					<span class="navbar-toggler-bar"></span>
-	            </button>
-	            <a class="navbar-brand" href="home.jsp">OrderBoy</a>
-			</div>
-			<div class="collapse navbar-collapse" id="navbarToggler">
-	            <ul class="navbar-nav ml-auto">
-					<li class="nav-item">
-	                    <a href="/loginUserForm" class="nav-link"><i class="nc-icon nc-single-02"></i>SignIn</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a href="#" target="_blank" class="nav-link"><i class="nc-icon nc-book-bookmark"></i>  User Manual</a>
-	                </li>
-	            </ul>
-	        </div>
-		</div>
-    </nav>
-     <form:form method="POST" action="/editUserDetailsPost" modelAttribute="userDetailsPojo">
+	       
+  
+     <form:form method="POST" enctype="multipart/form-data"  action="/editUserDetailsPost" modelAttribute="userDetailsPojo">
 	    <div class="wrapper">
-	        <div class="page-header" style="background-image: url('../img/worldmap.jpg');">
+	       
 	            <div class="filter"></div>
 	                <div class="container">
 	                    <div class="row">
 	                        <div class="col-lg-4 ml-auto mr-auto">
 	                            <div class="card card-register">
 	                                <h3 class="title">Edit User</h3>									
-	                                <form class="register-form">
+	                               
 	                                    <label>Company Name</label>
 	                                    <form:input path="companyName" type="text" class="form-control" placeholder="Enter Company Name" />
 										<form:errors path="companyName" style="color: red;" />
@@ -118,9 +98,10 @@
                         				<label>Password</label>
 	                                    <form:input path="userPojo.password" type="password" class="form-control" />
 	                                    <form:errors path="userPojo.password" style="color: red;" />
-	                                     <form:hidden path="userPojo.loginId" value ="userPojo.loginId"/> 
+	                                      <form:hidden path="userPojo.loginId"/>  
+	                                   <%--   <form:hidden path="id"/>  --%>
 	                                    <input type="submit" value="Submit" class="btn btn-danger btn-block btn-round" />
-	                                </form>		                                                                	                                
+	                                		                                                                	                                
 	                            </div>
 	                        </div>
 	                    </div>						

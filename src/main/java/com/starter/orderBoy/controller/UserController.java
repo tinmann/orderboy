@@ -55,10 +55,10 @@ public class UserController {
     }
     
     @RequestMapping(value="/editUserDetailsGet", method = RequestMethod.GET)
-    public ModelAndView editUserDetailsGet()
+    public ModelAndView editUserDetailsGet(ModelMap model)
     {
-    	 
-    	 return new ModelAndView("editUserDetails", "userDetailsPojo", ((UserPojo)httpSession.getAttribute("user")).getUserDetailsPojo());
+    	 model.addAttribute("selectPage","editUserDetails");
+    	 return new ModelAndView("admin/adminHome", "userDetailsPojo", userService.getUserDetailsToEdit(((UserPojo)httpSession.getAttribute("user")).getUserDetailsPojo().getId()));
     			 
     }
     
@@ -69,23 +69,32 @@ public class UserController {
     	if (result.hasErrors()) {
     		System.out.println("was here");
     		System.out.println(result.toString());
-    		
-            return "editUserDetails";
+    		 model.addAttribute("selectPage","editUserDetails");
+            return "admin/adminHome";
         }     
         try
         {
+        	UserDetailsPojo userDetailsOriginal = ((UserPojo)httpSession.getAttribute("user")).getUserDetailsPojo();
+        	userDetailsPojo.setId(userDetailsOriginal.getId());
+        	userDetailsPojo.getAddress().setAddressId(userDetailsOriginal.getAddress().getAddressId());
+        	userDetailsPojo.getUserPojo().setId(userDetailsOriginal.getUserPojo().getId());
+        	userDetailsPojo.getUserPojo().setLoginId(userDetailsOriginal.getUserPojo().getLoginId());
         	 UserDetailsPojo userDetailsPojoNew =  userService.editUserDetailsUser(userDetailsPojo);      
-             model.addAttribute("userObj",userDetailsPojoNew.getUserPojo());
+             model.addAttribute("userDetailsObj",userDetailsPojoNew);
              model.addAttribute("firstName", userDetailsPojoNew.getFirstName());
              model.addAttribute("lastName", userDetailsPojoNew.getLastName());
              model.addAttribute("type", userDetailsPojoNew.getType());
              model.addAttribute("message", "Successfully Edited");
-             return "editSuccessMessage";
+             model.addAttribute("selectPage","editUserSuccess");
+             return "admin/adminHome";
+            // return "editSuccessPage";
         }
     
         catch(Exception ex)
         {
-        	return "editUserDetails";
+        	 model.addAttribute("selectPage","editUserDetails");
+             return "admin/adminHome";
+        	
         }
     	
     }

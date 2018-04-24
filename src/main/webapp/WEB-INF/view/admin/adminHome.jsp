@@ -202,6 +202,16 @@
                                      <%@include file="../fileUploadView.jsp" %>
                                      </c:if>
                                      
+                                      <c:if test = "${selectPage=='editUserDetails'}">
+                                     <%@include file="../editUserDetails.jsp" %>
+                                     </c:if>
+                                     
+                                      <c:if test = "${selectPage=='editUserSuccess'}">
+                                     <%@include file="../editUserSuccess.jsp" %>
+                                     </c:if>
+                                     
+                                     
+                                     
 									
 									
 									
